@@ -1,5 +1,5 @@
 <template>
-    <mu-appbar title="导航条">
+    <mu-appbar title="导航条aaaa">
       <mu-icon-button icon="menu" slot="菜单"/>
     </mu-appbar>
 </template>

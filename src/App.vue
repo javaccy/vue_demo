@@ -1,14 +1,15 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import AdminAppbar from './components/commons/AdminAppbar.vue'
+
+  export default {
+    components: {AdminAppbar}
+  }
 </script>
 
 <style>
@@ -18,6 +19,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /*margin-top: 60px;*/
 }
+
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';  /*带入 material design 图标*/
 </style>

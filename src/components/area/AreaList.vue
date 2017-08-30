@@ -26,7 +26,7 @@
         </mu-tr>
       </mu-tbody>
       <mu-tfoot slot="footer">
-        <grid-condition-panel></grid-condition-panel>
+        <grid-panel></grid-panel>
         <mu-pagination :total="total" :showSizeChanger="showSizeChanger" :pageSizeOption="pageSizeOption"
                        @pageSizeChange="pageSizeChange" @pageChange="pageChange">
         </mu-pagination>
@@ -36,10 +36,10 @@
 </template>
 
 <script>
-  import GridConditionPanel from '../GridConditionPanel.vue'
+  import GridPanel from '../GridPanel.vue'
 
   export default {
-    components: {GridConditionPanel},
+    components: {GridPanel},
     name: 'AreaList',
     data () {
       return {
@@ -61,16 +61,24 @@
     },
     mounted () {
       this.getPage(1)
+      this.$eventBus.$on('submitGridConditions2', (params) => {
+        console.log(params)
+      })
     },
     methods: {
-      getPage (index) {
+      getPage (index, params) {
+        if (!params) {
+          params = ''
+        } else {
+          params = '&' + params
+        }
         let self = this
-        this.axios.post(this.$cfg.api_url + '/area/list?page=' + index + '&pageSize=' + this.pageSize).then((res) => {
+        this.axios.post(this.$cfg.api_url + '/area/list?page=' + index + '&pageSize=' + this.pageSize + params).then((res) => {
           self.pageSize = res.data.page.pageSize
           self.current = res.data.page.page
           self.total = res.data.page.count
           self.data = res.data.page.records
-          self.$eventBus.$emit('xxx', res.data)
+          self.$eventBus.$emit('initGridPanel', res.data)
         })
       },
       getParams (page) {

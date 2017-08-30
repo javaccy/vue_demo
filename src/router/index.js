@@ -5,6 +5,9 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import AdminLayout from '@/components/commons/AdminLayout'
 import AdminAppbar from '@/components/commons/AdminAppbar'
+import AdminDataGrid from '@/components/commons/AdminDataGrid'
+import AdminSimpleForm from '@/components/commons/AdminSimpleForm'
+import AreaList from '@/components/area/AreaList'
 Vue.use(Router)
 
 export default new Router({
@@ -27,7 +30,21 @@ export default new Router({
     },
     {
       path: '/admin',
-      component: AdminAppbar
+      component: AdminAppbar,
+      children: [
+        {
+          path: 'list',
+          component: AdminDataGrid
+        },
+        {
+          path: 'form',
+          component: AdminSimpleForm
+        },
+        {
+          path: 'area',
+          component: AreaList
+        }
+      ]
     }
   ]
 })

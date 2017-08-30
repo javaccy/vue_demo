@@ -11,7 +11,7 @@
     </mu-appbar>
     <admin-sidebar :show="open" v-on:changeState="toggle"></admin-sidebar>
     <div class="admin-content" :class="{'nav-hide': !open}">
-
+      <router-view></router-view>
     </div>
   </div>
 </template>
